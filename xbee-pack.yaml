@@ -1,1 +1,27 @@
 schema-version: 1.0
+type: builder
+description: |
+  The SQLite package is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine.
+  Installed Program: sqlite3
+  Installed Library: libsqlite3.so
+  Installed Directories: /usr/include/apr-1 and /usr/share/apr-1
+  Short Descriptions
+    sqlite3: is a terminal-based front-end to the SQLite library that can evaluate queries interactively and display the results
+    libsqlite3.so: contains the SQLite API functions
+  
+
+var:
+  version: 3.45.1
+
+provision:
+  - url:
+      from: https://sqlite.org/2024/sqlite-autoconf-3450100.tar.gz
+      todir: "{{ .xbee.src }}"
+
+build:
+  - shell:
+      cmds:
+        - ./configure --prefix=/usr --disable-static --enable-fts{4,5} CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1 -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -DSQLITE_ENABLE_DBSTAT_VTAB=1 -DSQLITE_SECURE_DELETE=1 -DSQLITE_ENABLE_FTS3_TOKENIZER=1"
+        - make
+        - make install
+      directory: "{{ .xbee.src }}/sqlite-autoconf-3450100"
