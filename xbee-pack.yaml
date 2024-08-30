@@ -11,7 +11,8 @@ description: |
   
 
 var:
-  version: 3.45.1
+  xbee:
+    version: 3.45.1
 
 provision:
   - url:
