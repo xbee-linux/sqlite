@@ -1,5 +1,5 @@
 schema-version: 1.0
-type: builder
+
 description: |
   The SQLite package is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine.
   Installed Program: sqlite3
